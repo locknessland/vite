@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+/* Demo styles proving the CSS pipeline runs through @lockness/vite. */
+body {
+    font-family: system-ui, sans-serif;
+}

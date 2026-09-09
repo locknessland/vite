@@ -1,0 +1,11 @@
+{
+    "//": "Demo app for @lockness/vite (#115). A workspace member so sibling import maps merge (it resolves @lockness/core etc. via the workspace, not a duplicated map — plan §8 A-M alternative). Deliberately has NO `exports`: it is a runnable example, never imported by name (the e2e test imports ./main.ts by relative path) and never published — which also keeps it out of the no-slow-types public-API surface. deps_analyzer's `demo` skip keeps it out of the DAG. The `vite` pin references packages/vite/deno.json as the ONE authoritative range (decision-table demo-pin row, A-M4) — `npm:vite` cannot resolve by member name.",
+    "//configLoader": "`--configLoader native` (#154) loads vite.config.ts through Deno's own runtime instead of Vite's esbuild pre-bundle, so the config's bare @lockness/* specifiers and the @lockness/core JSX runtime resolve via Deno. Without it the config fails to load (esbuild emits react/jsx-runtime and treats @lockness/* as external).",
+    "tasks": {
+        "dev": "LOCKNESS_VITE_DEV=1 deno run -A npm:vite --configLoader native",
+        "build": "deno run -A npm:vite build --configLoader native"
+    },
+    "imports": {
+        "vite": "npm:vite@^8"
+    }
+}
